@@ -34,6 +34,11 @@ export default function App(): JSX.Element {
     }
   }
 
+  function displayAnswer() {
+    document.getElementById("answer")!.innerHTML = secretWord.toUpperCase();
+  
+  }
+
   function addNewWord() {
     if (verifyWord(currentWord)) {
       setUserWords([...userWords, currentWord]);
@@ -111,6 +116,10 @@ export default function App(): JSX.Element {
       <div>
         <button onClick={addNewWord}>Submit</button>
         <button onClick={removeWords}>New Game </button>
+        <button onClick={displayAnswer}>Get Answer</button>
+        </div>
+      <div>
+        <h2 id="answer" className="header"></h2>
       </div>
     </>
   );
