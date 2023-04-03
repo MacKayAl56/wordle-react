@@ -17,6 +17,39 @@
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
+.grid {
+  display: inline-grid;
+  grid-template-columns: repeat(5, 60px);
+  grid-template-rows: repeat(6, 60px);
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+}
+.box {
+  outline: #3A3A3C solid 2px;
+  font-size: 32px;
+  padding-top: 10%;
+  font-weight: bold;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.field {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin-bottom: 60px;
+}
+
+.header {
+  font-size: xx-large;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+
+.subheader{
+  font-size: small;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+
 
 @keyframes logo-spin {
   from {
