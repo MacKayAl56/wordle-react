@@ -50,6 +50,24 @@
   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
 }
 
+.perfect{
+  background-color: #538d4e;
+  color: white;
+  outline-color: #538d4e;
+}
+
+.misplaced{
+  background-color: #b59f3b;
+  color: white;
+  outline-color: #b59f3b;
+}
+
+.wrong{
+  background-color:#3A3A3C;
+  color: white;
+  outline-color: #3A3A3C;
+}
+
 
 @keyframes logo-spin {
   from {

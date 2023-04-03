@@ -2,8 +2,7 @@ import './App.css'
 import Wordle from "./Wordle"
 function App() {
   const index = [];
-  var i = 0;
-  for (i = 0; i < 30; i++){
+  for (let i = 0; i < 30; i++){
     index.push(i);
   }
 
@@ -16,7 +15,6 @@ function App() {
         index.map((pos:number) =>
         <div className="box" key="pos"></div>)
       }
-
       </div>
     </div>
 

@@ -25,15 +25,20 @@ export default function App(): JSX.Element {
                 guessList.push(...guesses)
             });
     }, []);
+
   function displayWord(currentWord: string) {
-    for (var i = 0; i < 5; i++){
-      document.getElementsByClassName("box")[i].innerHTML = currentWord[i].toUpperCase();
+      const match = verifyMatch(secretWord, currentWord)
+    for (let i = 0; i < 5; i++){
+      document.getElementsByClassName("box")[i + userWords.length * 5].innerHTML = currentWord[i].toUpperCase();
+        document.getElementsByClassName("box")[i + userWords.length * 5].classList.add(match[i]);
     }
   }
+
   function addNewWord() {
     if (verifyWord(currentWord)) {
       setUserWords([...userWords, currentWord]);
       displayWord(currentWord);
+
     } else {
         alert("Invalid word: " + currentWord)
     }
@@ -69,7 +74,7 @@ export default function App(): JSX.Element {
         for (let k = 0; k < 5; k++) {
             if (guess.charAt(k) == secret.charAt(k)) {
                 matched[k] = true
-                outcome[k] = "P" // perfect match
+                outcome[k] = "perfect" // perfect match
                 perfectMatchCount++
             }
         }
@@ -86,27 +91,22 @@ export default function App(): JSX.Element {
                     }
                     const secretLetter = secret.charAt(s)
                     if (secretLetter == guessLetter) {
-                        outcome[g] = "M"   // misplaced match
+                        outcome[g] = "misplaced"   // misplaced match
                         hasMatch = true
                         matched[s] = true
                         break
                     }
                 }
-                if (!hasMatch) outcome[g] = "N" // no match
+                if (!hasMatch) outcome[g] = "wrong" // no match
             }
         }
         // Array outcome should encode the matching results
+        return outcome
     }
 
 
     return (
     <>
-      <ul>
-        {userWords.map((w: string) => {
-          return <li>{w}</li>;
-        })}
-      </ul>
-
       <input type="text" onChange={updateInput} value={currentWord} />
       <div>
         <button onClick={addNewWord}>Submit</button>
