@@ -25,10 +25,15 @@ export default function App(): JSX.Element {
                 guessList.push(...guesses)
             });
     }, []);
-
+  function displayWord(currentWord: string) {
+    for (var i = 0; i < 5; i++){
+      document.getElementsByClassName("box")[i].innerHTML = currentWord[i].toUpperCase();
+    }
+  }
   function addNewWord() {
     if (verifyWord(currentWord)) {
-        setUserWords([...userWords, currentWord]);
+      setUserWords([...userWords, currentWord]);
+      displayWord(currentWord);
     } else {
         alert("Invalid word: " + currentWord)
     }
@@ -39,6 +44,7 @@ export default function App(): JSX.Element {
   }
   function removeWords() {
     setUserWords([]);
+    window.location.reload();
   }
   
   function updateInput(ev: ChangeEvent<HTMLInputElement>) {
@@ -103,8 +109,8 @@ export default function App(): JSX.Element {
 
       <input type="text" onChange={updateInput} value={currentWord} />
       <div>
-        <button onClick={addNewWord}>Add Word</button>
-        <button onClick={removeWords}>Clear </button>
+        <button onClick={addNewWord}>Submit</button>
+        <button onClick={removeWords}>New Game </button>
       </div>
     </>
   );

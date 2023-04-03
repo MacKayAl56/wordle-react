@@ -14,7 +14,7 @@ function App() {
       <div className="grid">
       {
         index.map((pos:number) =>
-        <div className="box"></div>)
+        <div className="box" key="pos"></div>)
       }
 
       </div>
