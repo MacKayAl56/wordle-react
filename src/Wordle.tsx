@@ -1,22 +1,18 @@
 import {ChangeEvent, useEffect, useState} from "react";
-import words from "./wordles.txt";
 import validGuesses from "./guesses.txt";
 
 export default function App(): JSX.Element {
   const [userWords, setUserWords] = useState<Array<string>>([]);
   const [currentWord, setCurrentWord] = useState("");
-  let [ secretWord, setSecretWord ] = useState<string>("")
   const [ wordList ] = useState<string[]>([]);
-  const [ guessList ] = useState<string[]>([]);
+  const [guessList] = useState<string[]>([]);
+  let secretWord = ""
+  
+  type WordleResponse = {
+    secret: string
+  }
 
     useEffect(() => {
-        fetch(words)
-            .then(response => response.text())
-            .then(text => {
-                const words = text.split("\n")
-                wordList.push(...words)
-                setSecretWord(setRandomWord());
-            });
 
         fetch(validGuesses)
             .then(response => response.text())
@@ -25,6 +21,15 @@ export default function App(): JSX.Element {
                 guessList.push(...guesses)
             });
     }, []);
+  
+  function getSecretWord() {
+    axios.request({method: "GET", url: "http://localhost:8000/your_end_point_name"})
+      .then((res:AxiosResponse) => res.data)
+      .then((w: WorldResponse) => {
+        console.log(`The secret word from server is ${w.secret}`)
+        secretWord = w.secret;
+  })
+  }
 
   function displayWord(currentWord: string) {
       const match = verifyMatch(secretWord, currentWord)
@@ -53,6 +58,7 @@ export default function App(): JSX.Element {
     setCurrentWord("");
   }
   function removeWords() {
+    getSecretWord([]);
     setUserWords([]);
     window.location.reload();
   }
@@ -65,12 +71,6 @@ export default function App(): JSX.Element {
     return guessList.includes(word)
   }
 
-  function setRandomWord() {
-    const randomIndex = Math.floor(Math.random() * wordList.length)
-    const randomWord = wordList[randomIndex];
-    console.log("Secret word is: " + randomWord)
-    return randomWord
-  }
 
     function verifyMatch (secret: string, guess: string) {
         const matched = [false, false, false, false, false]
