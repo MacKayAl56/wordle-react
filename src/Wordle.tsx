@@ -27,7 +27,7 @@
 
         function getSecretWord() {
             axios
-                .get("http://localhost:8000/random-word")
+                .get("https://wordle-server2.onrender.com/random-word")
                 .then((res) => {
                     console.log(`The secret word from server is ${res.data.secret}`);
                     secretWord = res.data.secret;
